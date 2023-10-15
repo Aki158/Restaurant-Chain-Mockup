@@ -121,5 +121,21 @@ class User implements FileConvertible{
             'role' => $this->role
         ];
     }
+
+    public function toUserString(): string {
+        return $this->toString();
+    }
+
+    public function toUserHTML(): string {
+        return $this->toHTML();
+    }
+
+    public function toUserMarkdown(): string {
+        return $this->toMarkdown();
+    }
+
+    public function toUserArray(): array {
+        return $this->toArray();
+    }
 }
 ?>

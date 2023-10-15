@@ -108,5 +108,21 @@ class Company implements FileConvertible{
                  'founder' => $this->founder,
                  'totalEmployees' => $this->totalEmployees];
     }
+
+    public function toCompanyString(): string {
+        return $this->toString();
+    }
+
+    public function toCompanyHTML(): string {
+        return $this->toHTML();
+    }
+
+    public function toCompanyMarkdown(): string {
+        return $this->toMarkdown();
+    }
+  
+    public function toCompanyArray(): array {
+        return $this->toArray();
+    }
 }
 ?>

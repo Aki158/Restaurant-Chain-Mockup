@@ -9,14 +9,24 @@ class Employee extends User implements FileConvertible{
     private string $jobTitle;
     private float $salary;
     private DateTime $startDate;
-    private string $awards;
+    private array $awards;
 
     public function __construct(
-        string $jobTitle, float $salary, DateTime $startDate, string $awards
+        int $id, string $firstName, string $lastName,
+        string $email, string $password, string $phoneNumber,
+        string $address, DateTime $birthDate, DateTime $membershipExpirationDate, 
+        string $role, string $jobTitle, float $salary, 
+        string $startDate, array $awards
     ) {
+        parent::__construct(
+            $id, $firstName, $lastName,
+            $email, $password, $phoneNumber,
+            $address,  $birthDate, $membershipExpirationDate,
+            $role
+        );
         $this->jobTitle = $jobTitle;
         $this->salary = $salary;
-        $this->startDate = $startDate;
+        $this->startDate = new DateTime($startDate);
         $this->awards = $awards;
     }
 
@@ -59,5 +69,21 @@ class Employee extends User implements FileConvertible{
                  'startDate' => $this->startDate,
                  'awards' => $this->awards];
     }
+
+    public function getToUserString(): string {
+        return $this->toUserString();
+    }
+
+    public function getToUserHTML(): string {
+        return $this->toUserHTML();
+    }
+
+    public function getToUserMarkdown(): string {
+        return $this->toUserMarkdown();
+    }
+
+    public function getToUserArray(): array {
+        return $this->toUserArray();
+    } 
 }
 ?>

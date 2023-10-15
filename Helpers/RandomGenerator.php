@@ -2,16 +2,56 @@
 
 namespace Helpers;
 
-require_once "Models/User.php"; 
+require_once "Models/User.php";
 
 use Faker\Factory;
-use Models\User;
+use Models\Employee;
+use Models\RestaurantChain;
+use Models\RestaurantLocation;
 
 class RandomGenerator {
-    public static function user(): User {
+    public static function restaurantChain(): RestaurantChain {
+        $faker = Factory::create();
+
+        return new RestaurantChain(
+            $faker->company(),
+            (int)$faker->year(),
+            $faker->realText(),
+            $faker->url(),
+            $faker->phoneNumber(),
+            $faker->randomElement(["IT", "food", "Agriculture"]),
+            $faker->name(),
+            $faker->boolean(),
+            $faker->country(),
+            $faker->name(),
+            $faker->randomNumber(),
+            $faker->randomNumber(4, true),
+            self::generateArray("restaurantLocations"),
+            $faker->randomElement(["Hamburgers", "curry", "pasta", "grilled fish", "tempura"]),
+            $faker->randomNumber(2, false),
+            $faker->company()
+        );
+    }
+
+    public static function restaurantLocation(): RestaurantLocation {
         $faker = Factory::create();
         
-        return new User(
+        return new RestaurantLocation(
+            $faker->name(),
+            $faker->address(),
+            $faker->city(),
+            $faker->randomElement(["Crowded", "Moderate", "Empty"]),
+            $faker->postcode(),
+            self::generateArray("employees"),
+            $faker->boolean(),
+            $faker->boolean()
+            );
+    }
+
+    public static function employee(): Employee {
+        $faker = Factory::create();
+
+        return new Employee(
             $faker->randomNumber(),
             $faker->firstName(),
             $faker->lastName(),
@@ -21,20 +61,28 @@ class RandomGenerator {
             $faker->address,
             $faker->dateTimeThisCentury,
             $faker->dateTimeBetween('-10 years', '+20 years'),
-            $faker->randomElement(['admin', 'user', 'editor'])
+            $faker->randomElement(['admin', 'user', 'editor']),
+            $faker->jobTitle(),
+            $faker->randomFloat(),
+            $faker->date(),
+            array($faker->randomElement(["Good design","Good taste", "Good Customer service"]))
         );
     }
 
-    public static function users(int $min, int $max): array {
+    public static function generateArray(string $input): array {
         $faker = Factory::create();
-        $users = [];
-        $numOfUsers = $faker->numberBetween($min, $max);
+        $arr = [];
+        $l = $faker->randomNumber(1, true);
 
-        for ($i = 0; $i < $numOfUsers; $i++) {
-            $users[] = self::user();
+        for ($i = 0; $i < $l; $i++) {
+            if($input === "restaurantLocations"){
+                $arr[$i] = self::restaurantLocation();
+            }
+            else if($input === "employees"){
+                $arr[$i] = self::employee();
+            }
         }
-
-        return $users;
+        return $arr;
     }
 }
 ?>
