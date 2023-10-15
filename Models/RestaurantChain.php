@@ -2,6 +2,7 @@
 
 namespace Models;
 use FileConvertible;
+use Models\Company;
 
 class RestaurantChain extends Company implements FileConvertible{
     private int $chainId;
@@ -11,9 +12,19 @@ class RestaurantChain extends Company implements FileConvertible{
     private string $parentCompany;
 
     public function __construct(
+        string $name, int $foundingYear, string $description,
+        string $website, string $phone, string $industry,
+        string $ceo, bool $isPublicityTraded, string $country,
+        string $founder, int $totalEmployees,
         int $chainId, array $restaurantLocation, string $cuisineType,
         int $numberOfLocation,string $parentCompany
     ) {
+        parent::__construct(
+            $name, $foundingYear, $description,
+            $website, $phone, $industry,
+            $ceo, $isPublicityTraded, $country,
+            $founder, $totalEmployees
+        );
         $this->chainId = $chainId;
         $this->restaurantLocation = $restaurantLocation;
         $this->cuisineType = $cuisineType;
@@ -64,7 +75,23 @@ class RestaurantChain extends Company implements FileConvertible{
             'cuisineType' => $this->cuisineType,
             'numberOfLocation' => $this->numberOfLocation,
             'parentCompany' => $this->parentCompany
-        ];        
+        ];
+    }
+
+    public function getToCompanyString(): string {
+        return $this->toCompanyString();
+    }
+
+    public function getToCompanyHTML(): string {
+        return $this->toCompanyHTML();
+    }
+
+    public function getToCompanyMarkdown(): string {
+        return $this->toCompanyMarkdown();
+    }
+  
+    public function getToCompanyArray(): array {
+        return $this->toCompanyArray();
     }
 }
 ?>
