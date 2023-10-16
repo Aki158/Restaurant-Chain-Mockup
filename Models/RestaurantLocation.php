@@ -29,15 +29,18 @@ class RestaurantLocation implements FileConvertible{
         $this->hasDriveThru = $hasDriveThru;
     }
 
+    public function getEmployees(): array {
+        return $this->employees;
+    }
+
     public function toString(): string {
         return sprintf(
-            "Name: %s\nAddress: %s\nCity: %s\nState: %s\nzipCode: %s\nEmployees: %s\nisOpen: %d\nHasDriveThru: %d\n",
+            "Name: %s\nAddress: %s\nCity: %s\nState: %s\nzipCode: %s\nisOpen: %d\nHasDriveThru: %d\n",
             $this->name,
             $this->address,
             $this->city,
             $this->state,
             $this->zipCode,
-            $this->employees,
             $this->isOpen,
             $this->hasDriveThru
         );
@@ -46,18 +49,19 @@ class RestaurantLocation implements FileConvertible{
     public function toHTML(): string {
         return sprintf("
             <div class='Restaurant-Location'>
-                <div class=''>SAMPLE</div>
-                <p>%s</p>
-                <p>%f</p>
-                <p>%s</p>
-                <p>%s</p>
+                <p>Name: %s</p>
+                <p>Address: %s</p>
+                <p>City: %s</p>
+                <p>State: %s</p>
+                <p>Zip Code: %s</p>
+                <p>Is Open: %d</p>
+                <p>Has Drive Thru: %d</p>
             </div>",
             $this->name,
             $this->address,
             $this->city,
             $this->state,
             $this->zipCode,
-            $this->employees,
             $this->isOpen,
             $this->hasDriveThru
         );
@@ -69,7 +73,6 @@ class RestaurantLocation implements FileConvertible{
                  - City: {$this->city}
                  - State: {$this->state}
                  - Zip Code: {$this->zipCode}
-                 - Employees: {$this->employees}
                  - Is Open: {$this->isOpen}
                  - Has Drive Thru: {$this->hasDriveThru}";
     }
@@ -80,7 +83,6 @@ class RestaurantLocation implements FileConvertible{
                  'city' => $this->city,
                  'state' => $this->state,
                  'zipCode' => $this->zipCode,
-                 'employees' => $this->employees,
                  'isOpen' => $this->isOpen,
                  'hasDriveThru' => $this->hasDriveThru];
     }

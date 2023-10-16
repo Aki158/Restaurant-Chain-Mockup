@@ -75,7 +75,10 @@ class RandomGenerator {
         $l = $faker->randomNumber(1, true);
 
         for ($i = 0; $i < $l; $i++) {
-            if($input === "restaurantLocations"){
+            if($input == "restaurantChains"){
+                $arr[$i] = self::restaurantChain();
+            }
+            elseif($input === "restaurantLocations"){
                 $arr[$i] = self::restaurantLocation();
             }
             else if($input === "employees"){

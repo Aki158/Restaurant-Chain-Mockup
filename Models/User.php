@@ -5,9 +5,8 @@ namespace Models;
 require_once "FileConvertible/FileConvertible.php"; 
 
 use Datetime;
-use FileConvertible;
 
-class User implements FileConvertible{
+class User{
     private int $id;
     private string $firstName;
     private string $lastName;
@@ -15,8 +14,8 @@ class User implements FileConvertible{
     private string $password;
     private string $phoneNumber;
     private string $address;
-    private DateTime $birthDate;
-    private DateTime $membershipExpirationDate;
+    private string $birthDate;
+    private string $membershipExpirationDate;
     private string $role;
     private string $hashedPassword;
 
@@ -32,14 +31,13 @@ class User implements FileConvertible{
         $this->password = $password;
         $this->phoneNumber = $phoneNumber;
         $this->address = $address;
-        $this->birthDate = $birthDate;
-        $this->membershipExpirationDate = $membershipExpirationDate;
+        $this->birthDate = $birthDate->format('Y-m-d');
+        $this->membershipExpirationDate = $membershipExpirationDate->format('Y-m-d');
         $this->role = $role;
         $this->hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     }
 
     public function login(string $password): bool {
-        // Validate password with the hashed password
         return password_verify($password, $this->hashedPassword);
     }
 
@@ -61,7 +59,7 @@ class User implements FileConvertible{
         return $currentDate > $this->membershipExpirationDate;
     }
 
-    public function toString(): string {
+    public function toUserString(): string {
         return sprintf(
             "User ID: %d\nName: %s %s\nEmail: %s\nPhone Number: %s\nAddress: %s\nBirth Date: %s\nMembership Expiration Date: %s\nRole: %s\n",
             $this->id,
@@ -70,20 +68,19 @@ class User implements FileConvertible{
             $this->email,
             $this->phoneNumber,
             $this->address,
-            $this->birthDate->format('Y-m-d'),
-            $this->membershipExpirationDate->format('Y-m-d'),
+            $this->birthDate,
+            $this->membershipExpirationDate,
             $this->role
         );
     }
 
-    public function toHTML(): string {
+    public function toUserHTML(): string {
         return sprintf("
-            <div class='user-card'>
-                <div class='avatar'>SAMPLE</div>
-                <h2>%s %s</h2>
-                <p>%s</p>
-                <p>%s</p>
-                <p>%s</p>
+            <div class='user'>
+                <p>User: %s %s</p>
+                <p>Email: %s</p>
+                <p>Phone Number: %s</p>
+                <p>Address: %s</p>
                 <p>Birth Date: %s</p>
                 <p>Membership Expiration Date: %s</p>
                 <p>Role: %s</p>
@@ -93,13 +90,13 @@ class User implements FileConvertible{
             $this->email,
             $this->phoneNumber,
             $this->address,
-            $this->birthDate->format('Y-m-d'),
-            $this->membershipExpirationDate->format('Y-m-d'),
+            $this->birthDate,
+            $this->membershipExpirationDate,
             $this->role
         );
     }
-
-    public function toMarkdown(): string {
+    
+    public function toUserMarkdown(): string {
         return "## User: {$this->firstName} {$this->lastName}
                  - Email: {$this->email}
                  - Phone Number: {$this->phoneNumber}
@@ -108,7 +105,7 @@ class User implements FileConvertible{
                  - Role: {$this->role}";
     }
 
-    public function toArray(): array {
+    public function toUserArray(): array {
         return [
             'id' => $this->id,
             'firstName' => $this->firstName,
@@ -120,22 +117,6 @@ class User implements FileConvertible{
             'birthDate' => $this->birthDate,
             'role' => $this->role
         ];
-    }
-
-    public function toUserString(): string {
-        return $this->toString();
-    }
-
-    public function toUserHTML(): string {
-        return $this->toHTML();
-    }
-
-    public function toUserMarkdown(): string {
-        return $this->toMarkdown();
-    }
-
-    public function toUserArray(): array {
-        return $this->toArray();
     }
 }
 ?>

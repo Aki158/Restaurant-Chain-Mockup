@@ -12,7 +12,7 @@ require_once __DIR__ . "/Models/RestaurantLocation.php";
 
 use Helpers\RandomGenerator;
 
-$restaurantChain = RandomGenerator::restaurantChain();
+$restaurantChains = RandomGenerator::generateArray("restaurantChains");
 
 ?>
 
@@ -30,21 +30,55 @@ $restaurantChain = RandomGenerator::restaurantChain();
     </style>
 </head>
 <body>
-    <h1>Restaurant Chain Mockup</h1>
-    <?php
-    echo $restaurantChain->toHTML();
-    echo $restaurantChain->getToCompanyHTML();
-    ?>
-    
-    <?php foreach ($restaurantChain->$restaurantLocation as $restaurantLocation): ?>
-    <div class="user-card">
-        <!-- ユーザー情報の表示 -->
-        <?php echo $restaurantLocation->toHTML(); ?>
-        <?php foreach ($restaurantLocation->$employees as $employee): ?>
-            <?php echo $employee->toHTML(); ?>
-            <?php echo $employee->getToUserHTML(); ?>
-        <?php endforeach; ?>
+    <div class="text-center my-3 bg-primary">
+        <h1>Restaurant Chain Mockup</h1>
     </div>
+    <?php foreach ($restaurantChains as $restaurantChain): ?>
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <?php
+                        echo "★★★RestaurantChain★★★\n";
+                        echo "Restaurant Chain Information\n";
+                        echo $restaurantChain->toHTML();
+                        echo "★★★Company★★★\n";
+                        echo $restaurantChain->toCompanyHTML();
+                    ?>
+                </div>
+            </div>
+        </div>
+        
+        <?php foreach ($restaurantChain->getRestaurantLocation() as $restaurantLocation): ?>
+            <?php 
+                echo "★★★RestaurantLocation★★★";
+                echo $restaurantLocation->toHTML(); 
+            ?>
+
+            <!-- ユーザー情報の表示 -->
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Accordion Item #_debug
+                    </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <?php foreach ($restaurantLocation->getEmployees() as $employee): ?>
+                                <?php 
+                                    echo "★★★Employee★★★";
+                                    echo $employee->toHTML();
+                                ?>
+                                <?php
+                                    echo "★★★User★★★";
+                                    echo $employee->toUserHTML(); 
+                                ?>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
     <?php endforeach; ?>
 
     <!--  Separate Popper and Bootstrap JS -->
@@ -53,3 +87,4 @@ $restaurantChain = RandomGenerator::restaurantChain();
     
 </body>
 </html>
+

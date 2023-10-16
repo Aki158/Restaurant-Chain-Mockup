@@ -32,6 +32,10 @@ class RestaurantChain extends Company implements FileConvertible{
         $this->parentCompany = $parentCompany;
     }
 
+    public function getRestaurantLocation(): array{
+        return $this->restaurantLocation;
+    }
+
     public function toString(): string {
         return sprintf(
             "Chain Id: %d\nRestaurant Locations: %s\nCuisine Type: %s\nNumber Of Location: %d\nParent Company: %s\n",
@@ -46,11 +50,11 @@ class RestaurantChain extends Company implements FileConvertible{
     public function toHTML(): string {
         return sprintf("
             <div class='restaurant-chain'>
-                <p>%d</p>
-                <p>%s</p>
-                <p>%s</p>
-                <p>%d</p>
-                <p>%s</p>
+                <p>Chain Id: %d</p>
+                <p>Restaurant Location: %s</p>
+                <p>Cuisine Type: %s</p>
+                <p>Number Of Location: %d</p>
+                <p>Parent Company: %s</p>
             </div>",
             $this->chainId,
             $this->restaurantLocation,

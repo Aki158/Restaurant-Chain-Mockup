@@ -1,9 +1,8 @@
 <?php
 
 namespace Models;
-use FileConvertible;
 
-class Company implements FileConvertible{
+class Company{
     private string $name;
     private int $foundingYear;
     private string $description;
@@ -35,7 +34,7 @@ class Company implements FileConvertible{
         $this->totalEmployees = $totalEmployees;
     }
 
-    public function toString(): string {
+    public function toCompanyString(): string {
         return sprintf(
             "name: %s\nFounding Year: %d\ndescription: %s\nwebsite: %d\nphone: %s\nindustry: %s\nceo: %s\nisPublicityTraded: %d\ncountry: %s\nfounder: %s\ntotalEmployees: %d\n",
             $this->name,
@@ -52,20 +51,20 @@ class Company implements FileConvertible{
         );
     }
 
-    public function toHTML(): string {
+    public function toCompanyHTML(): string {
         return sprintf("
             <div class='company'>
-                <p>%s</p>
-                <p>%d</p>
-                <p>%s</p>
-                <p>%s</p>
-                <p>%s</p>
-                <p>%s</p>
-                <p>%s</p>
-                <p>%d</p>
-                <p>%s</p>
-                <p>%s</p>
-                <p>%d</p>
+                <p>Name: %s</p>
+                <p>Founding Year: %d</p>
+                <p>Description: %s</p>
+                <p>Website: %s</p>
+                <p>Phone: %s</p>
+                <p>Industry: %s</p>
+                <p>CEO: %s</p>
+                <p>Is Publicity Traded: %d</p>
+                <p>Country: %s</p>
+                <p>Founder: %s</p>
+                <p>Total Employees: %d</p>
             </div>",
             $this->name,
             $this->foundingYear,
@@ -81,7 +80,7 @@ class Company implements FileConvertible{
         );
     }
 
-    public function toMarkdown(): string {
+    public function toCompanyMarkdown(): string {
         return " - Name: {$this->name}
                  - Founding Year: {$this->foundingYear}
                  - Description: {$this->description}
@@ -95,7 +94,7 @@ class Company implements FileConvertible{
                  - Total Employees: {$this->totalEmployees}";
     }
   
-    public function toArray(): array {
+    public function toCompanyArray(): array {
         return  ['name' => $this->name,
                  'foundingYear' => $this->foundingYear,
                  'description' => $this->description,
@@ -107,22 +106,6 @@ class Company implements FileConvertible{
                  'country' => $this->country,
                  'founder' => $this->founder,
                  'totalEmployees' => $this->totalEmployees];
-    }
-
-    public function toCompanyString(): string {
-        return $this->toString();
-    }
-
-    public function toCompanyHTML(): string {
-        return $this->toHTML();
-    }
-
-    public function toCompanyMarkdown(): string {
-        return $this->toMarkdown();
-    }
-  
-    public function toCompanyArray(): array {
-        return $this->toArray();
     }
 }
 ?>
