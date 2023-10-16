@@ -8,8 +8,10 @@ use FileConvertible;
 class Employee extends User implements FileConvertible{
     private string $jobTitle;
     private float $salary;
-    private DateTime $startDate;
+    private string $startDate;
     private array $awards;
+
+    private string $awardsStr;
 
     public function __construct(
         int $id, string $firstName, string $lastName,
@@ -26,8 +28,20 @@ class Employee extends User implements FileConvertible{
         );
         $this->jobTitle = $jobTitle;
         $this->salary = $salary;
-        $this->startDate = new DateTime($startDate);
+        $this->startDate = $startDate;
         $this->awards = $awards;
+
+        $this->awardsStr = $this->getAwardsStr($awards);
+
+    }
+
+    public function getAwardsStr(array $awards): string {
+        $res = "";
+
+        for($i = 0;$i < count($awards);$i++){
+            $res .= $awards[$i].", ";
+        }
+        return substr($res,0,strlen($res)-2);
     }
 
     public function toString(): string {
@@ -36,23 +50,22 @@ class Employee extends User implements FileConvertible{
             $this->jobTitle,
             $this->salary,
             $this->startDate,
-            $this->awards
+            $this->awardsStr
         );
     }
 
     public function toHTML(): string {
         return sprintf("
             <div class='employee'>
-                <div class=''>SAMPLE</div>
-                <p>%s</p>
-                <p>%f</p>
-                <p>%s</p>
-                <p>%s</p>
+                <p>Job Title: %s</p>
+                <p>Salary: %f</p>
+                <p>Start Date: %s</p>
+                <p>Awards: %s</p>
             </div>",
             $this->jobTitle,
             $this->salary,
             $this->startDate,
-            $this->awards
+            $this->awardsStr
         );
     }
 
@@ -60,30 +73,14 @@ class Employee extends User implements FileConvertible{
         return " - Job Title: {$this->jobTitle}
                  - Salary: {$this->salary}
                  - Start Date: {$this->startDate}
-                 - Awards: {$this->awards}";
+                 - Awards: {$this->awardsStr}";
     }
   
     public function toArray(): array {
         return  ['jobTitle' => $this->jobTitle,
                  'salary' => $this->salary,
                  'startDate' => $this->startDate,
-                 'awards' => $this->awards];
+                 'awards' => $this->awardsStr];
     }
-
-    public function getToUserString(): string {
-        return $this->toUserString();
-    }
-
-    public function getToUserHTML(): string {
-        return $this->toUserHTML();
-    }
-
-    public function getToUserMarkdown(): string {
-        return $this->toUserMarkdown();
-    }
-
-    public function getToUserArray(): array {
-        return $this->toUserArray();
-    } 
 }
 ?>
