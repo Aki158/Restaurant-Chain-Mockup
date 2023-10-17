@@ -69,10 +69,10 @@ class RandomGenerator {
         );
     }
 
-    public static function generateArray(string $input): array {
+    public static function generateArray(string $input, int $min = 5, int $max = 10): array {
         $faker = Factory::create();
         $arr = [];
-        $l = $faker->randomNumber(1, true);
+        $l = $faker->numberBetween($min, $max);
 
         for ($i = 0; $i < $l; $i++) {
             if($input == "restaurantChains"){

@@ -5,8 +5,9 @@ namespace Models;
 require_once "FileConvertible/FileConvertible.php"; 
 
 use Datetime;
+use FileConvertible;
 
-class User{
+class User implements FileConvertible{
     private int $id;
     private string $firstName;
     private string $lastName;
@@ -59,7 +60,15 @@ class User{
         return $currentDate > $this->membershipExpirationDate;
     }
 
-    public function toUserString(): string {
+    public function getID(): int {
+        return $this->id;
+    }
+
+    public function getUserName(): string {
+        return $this->firstName." ".$this->lastName;
+    }
+
+    public function toString(): string {
         return sprintf(
             "User ID: %d\nName: %s %s\nEmail: %s\nPhone Number: %s\nAddress: %s\nBirth Date: %s\nMembership Expiration Date: %s\nRole: %s\n",
             $this->id,
@@ -74,17 +83,15 @@ class User{
         );
     }
 
-    public function toUserHTML(): string {
+    public function toHTML(): string {
         return sprintf("
-            <div class='user'>
                 <p>User: %s %s</p>
                 <p>Email: %s</p>
                 <p>Phone Number: %s</p>
                 <p>Address: %s</p>
                 <p>Birth Date: %s</p>
                 <p>Membership Expiration Date: %s</p>
-                <p>Role: %s</p>
-            </div>",
+                <p>Role: %s</p>",
             $this->firstName,
             $this->lastName,
             $this->email,
@@ -94,9 +101,9 @@ class User{
             $this->membershipExpirationDate,
             $this->role
         );
-    }
+    }    
     
-    public function toUserMarkdown(): string {
+    public function toMarkdown(): string {
         return "## User: {$this->firstName} {$this->lastName}
                  - Email: {$this->email}
                  - Phone Number: {$this->phoneNumber}
@@ -105,7 +112,7 @@ class User{
                  - Role: {$this->role}";
     }
 
-    public function toUserArray(): array {
+    public function toArray(): array {
         return [
             'id' => $this->id,
             'firstName' => $this->firstName,
