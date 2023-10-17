@@ -1,9 +1,11 @@
 <?php
 
-namespace Models;
+namespace Models\Employees;
 
 use DateTime;
-use FileConvertible;
+
+use Interfaces\FileConvertible;
+use Models\Users\User;
 
 class Employee extends User implements FileConvertible{
     private string $jobTitle;
@@ -75,7 +77,7 @@ class Employee extends User implements FileConvertible{
         return  ['jobTitle' => $this->jobTitle,
                  'salary' => $this->salary,
                  'startDate' => $this->startDate,
-                 'awards' => $this->awardsStr];
+                 'awards' => $this->awards];
     }
 }
 ?>

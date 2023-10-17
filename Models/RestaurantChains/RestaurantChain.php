@@ -1,8 +1,9 @@
 <?php
 
-namespace Models;
-use FileConvertible;
-use Models\Company;
+namespace Models\RestaurantChains;
+
+use Interfaces\FileConvertible;
+use Models\Companies\Company;
 
 class RestaurantChain extends Company implements FileConvertible{
     private int $chainId;
@@ -70,22 +71,6 @@ class RestaurantChain extends Company implements FileConvertible{
             'numberOfLocation' => $this->numberOfLocation,
             'parentCompany' => $this->parentCompany
         ];
-    }
-
-    public function getToCompanyString(): string {
-        return $this->toCompanyString();
-    }
-
-    public function getToCompanyHTML(): string {
-        return $this->toCompanyHTML();
-    }
-
-    public function getToCompanyMarkdown(): string {
-        return $this->toCompanyMarkdown();
-    }
-  
-    public function getToCompanyArray(): array {
-        return $this->toCompanyArray();
     }
 }
 ?>

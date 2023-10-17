@@ -1,26 +1,22 @@
 <?php
+
 // コードベースのファイルのオートロード
-// spl_autoload_register();
+spl_autoload_extensions(".php"); 
+spl_autoload_register();
+
 // composerの依存関係のオートロード
 require_once 'vendor/autoload.php';
 
-require_once __DIR__ . "/Helpers/RandomGenerator.php"; 
-require_once __DIR__ . "/Models/Company.php"; 
-require_once __DIR__ . "/Models/Employee.php"; 
-require_once __DIR__ . "/Models/RestaurantChain.php"; 
-require_once __DIR__ . "/Models/RestaurantLocation.php"; 
-
-use Helpers\RandomGenerator;
-
 // クエリ文字列からパラメータを取得
-$min = $_GET['min'] ?? 5;
-$max = $_GET['max'] ?? 10;
+$min = $_GET['min'] ?? 2;
+$max = $_GET['max'] ?? 5;
 
 // パラメータが整数であることを確認
 $min = (int)$min;
 $max = (int)$max;
 
-$restaurantChains = RandomGenerator::generateArray("restaurantChains",$min,$max);
+$restaurantChains = \Helpers\RandomGenerator::generateArray("restaurantChains",$min,$max);
+
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +43,6 @@ $restaurantChains = RandomGenerator::generateArray("restaurantChains",$min,$max)
             border: 1px solid #ddd;
             padding: 15px;
         }
-
     </style>
 </head>
 <body>

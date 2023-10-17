@@ -2,12 +2,11 @@
 
 namespace Helpers;
 
-require_once "Models/User.php";
-
 use Faker\Factory;
-use Models\Employee;
-use Models\RestaurantChain;
-use Models\RestaurantLocation;
+
+use Models\Employees\Employee;
+use Models\RestaurantChains\RestaurantChain;
+use Models\RestaurantLocations\RestaurantLocation;
 
 class RandomGenerator {
     public static function restaurantChain(): RestaurantChain {
@@ -69,7 +68,7 @@ class RandomGenerator {
         );
     }
 
-    public static function generateArray(string $input, int $min = 5, int $max = 10): array {
+    public static function generateArray(string $input, int $min = 2, int $max = 5): array {
         $faker = Factory::create();
         $arr = [];
         $l = $faker->numberBetween($min, $max);
