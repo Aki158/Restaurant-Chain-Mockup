@@ -1,11 +1,10 @@
 <?php
 
-namespace Models;
-
-require_once "FileConvertible/FileConvertible.php"; 
+namespace Models\Users;
 
 use Datetime;
-use FileConvertible;
+
+use Interfaces\FileConvertible;
 
 class User implements FileConvertible{
     private int $id;

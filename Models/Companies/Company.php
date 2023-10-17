@@ -1,7 +1,8 @@
 <?php
 
-namespace Models;
-use FileConvertible;
+namespace Models\Companies;
+
+use Interfaces\FileConvertible;
 
 class Company implements FileConvertible{
     private string $name;

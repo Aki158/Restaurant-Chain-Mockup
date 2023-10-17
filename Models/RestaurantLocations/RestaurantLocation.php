@@ -1,7 +1,8 @@
 <?php
 
-namespace Models;
-use FileConvertible;
+namespace Models\RestaurantLocations;
+
+use Interfaces\FileConvertible;
 
 class RestaurantLocation implements FileConvertible{
     private string $name;
