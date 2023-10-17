@@ -1,7 +1,6 @@
 <?php
 
 namespace Models;
-
 use FileConvertible;
 
 class RestaurantLocation implements FileConvertible{
@@ -47,23 +46,18 @@ class RestaurantLocation implements FileConvertible{
     }
 
     public function toHTML(): string {
-        return sprintf("
-            <div class='Restaurant-Location'>
-                <p>Name: %s</p>
-                <p>Address: %s</p>
-                <p>City: %s</p>
-                <p>State: %s</p>
-                <p>Zip Code: %s</p>
-                <p>Is Open: %d</p>
-                <p>Has Drive Thru: %d</p>
-            </div>",
+        return sprintf(
+            '<p>Company Name: %s, Address: %s, Zip Code: %s</p>',
             $this->name,
             $this->address,
-            $this->city,
-            $this->state,
             $this->zipCode,
-            $this->isOpen,
-            $this->hasDriveThru
+        );
+    }
+
+    public function toNameHTML(): string {
+        return sprintf(
+            "<p>%s</p>",
+            $this->name
         );
     }
 

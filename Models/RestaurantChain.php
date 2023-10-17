@@ -48,19 +48,9 @@ class RestaurantChain extends Company implements FileConvertible{
     }
 
     public function toHTML(): string {
-        return sprintf("
-            <div class='restaurant-chain'>
-                <p>Chain Id: %d</p>
-                <p>Restaurant Location: %s</p>
-                <p>Cuisine Type: %s</p>
-                <p>Number Of Location: %d</p>
-                <p>Parent Company: %s</p>
-            </div>",
-            $this->chainId,
-            $this->restaurantLocation,
-            $this->cuisineType,
-            $this->numberOfLocation,
-            $this->parentCompany
+        return sprintf(
+            "<h2>Restaurant Chain : %s</h2>",
+            parent::toHTML()
         );
     }
 

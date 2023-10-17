@@ -55,17 +55,12 @@ class Employee extends User implements FileConvertible{
     }
 
     public function toHTML(): string {
-        return sprintf("
-            <div class='employee'>
-                <p>Job Title: %s</p>
-                <p>Salary: %f</p>
-                <p>Start Date: %s</p>
-                <p>Awards: %s</p>
-            </div>",
+        return sprintf(
+            "<p>ID: %d, Job Title: %s, Name: %s, Start Date: %s</p>",
+            parent::getID(),
             $this->jobTitle,
-            $this->salary,
+            parent::getUserName(),
             $this->startDate,
-            $this->awardsStr
         );
     }
 
