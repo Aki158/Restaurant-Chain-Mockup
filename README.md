@@ -24,4 +24,4 @@ RecursionCSのBackendProject4_Restaurant-Chain-Mockupのリポジトリーにな
 ![image](https://github.com/Aki158/Restaurant-Chain-Mockup/assets/119317071/beb71755-a19a-48c1-acfc-cd3dd6bb7c56)
 
 ## 使用方法
->php -S localhost:8000
+https://restaurant-chain-mockup.aki158-website.blog
